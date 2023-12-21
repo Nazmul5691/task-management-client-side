@@ -1,3 +1,5 @@
+
+
 import { useContext } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/Authproviders";
@@ -5,20 +7,21 @@ import { FaHome } from "react-icons/fa";
 import { MdAddTask } from "react-icons/md";
 import { TbLogout } from "react-icons/tb";
 import { GrLinkPrevious } from "react-icons/gr";
+import AddTask from "../AddTask/AddTask";
 
 const Dashboard = () => {
-
   const { user } = useContext(AuthContext);
-  const {  logOut } = useContext(AuthContext);
+  const { logOut } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
 
+  
 
   const handleLogout = () => {
     logOut()
       .then(() => {
-        navigate(location?.state ? location?.state: '/')
+        navigate(location?.state ? location?.state : "/");
       })
       .catch((error) => {
         console.error("Logout error", error);
@@ -38,15 +41,47 @@ const Dashboard = () => {
               />
             </div>
 
+
             <ul className="list-none  p-0">
               <li className="flex items-center text-xs my-1 lg:text-lg no-list-style">
-                <FaHome className="mr-2" /> {/* Adjust the margin as needed */}
+                <FaHome className="mr-2" /> 
                 <NavLink to="/">Home</NavLink>
               </li>
+
+
+
               <li className="flex items-center text-xs lg:text-lg no-list-style">
                 <MdAddTask className="mr-2" />
-                <NavLink to="/dashboard/newTask">New Task</NavLink>
+                <button
+                  className=""
+                  onClick={() =>
+                    document.getElementById("my_modal_4").showModal()
+                  }
+                >
+                  Add Task
+                </button>
+                <dialog
+                  id="my_modal_4"
+                  className="modal fixed inset-0 flex items-center justify-center overflow-auto"
+                >
+                  <div className="modal-overlay absolute w-full h-full bg-gray-800 opacity-50"></div>
+                  <div className="modal-box w-11/12 max-w-5xl bg-white p-8 rounded-lg shadow-lg">
+                    <AddTask />
+                    <div className="modal-action mt-4 flex justify-end">
+                      {/* Manually close the modal on button click */}
+                      <button
+                        className="btn bg-gray-500 hover:bg-gray-400 text-white"
+                        onClick={() =>
+                          document.getElementById("my_modal_4").close()
+                        }
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </dialog>
               </li>
+
               <li className="flex items-center text-xs my-1 lg:text-lg no-list-style">
                 <GrLinkPrevious className="mr-2" />
                 <NavLink to="/dashboard/previousTask">Previous Task</NavLink>
