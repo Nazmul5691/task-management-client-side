@@ -17,7 +17,7 @@ const AddTask = () => {
     data.datelines = data.datelines || null;
 
     // Send data to the server
-    fetch("http://localhost:3000/addTask", {
+    fetch("https://task-management-server-side-orcin.vercel.app/addTask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -209,7 +209,7 @@ export default AddTask;
 //     console.log(newProduct);
 
 //     // Send data to the server
-//     fetch('http://localhost:3000/addTask', {
+//     fetch('https://task-management-server-side-orcin.vercel.app/addTask', {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json',

@@ -33,7 +33,7 @@ const SignUp = () => {
         const user = { email, createdAt: createdAt };
 
         // Send user data to your server (Assuming you have a server)
-        fetch('http://localhost:3000/user', {
+        fetch('https://task-management-server-side-orcin.vercel.app/user', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
